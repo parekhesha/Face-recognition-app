@@ -30,8 +30,13 @@ FACE_SIZE = (200, 200)
 RECOGNITION_THRESHOLD = 75
 
 face_cascade = cv2.CascadeClassifier(
-    cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+    os.path.join(BASE_DIR, "models", "haarcascade_frontalface_default.xml")
 )
+if face_cascade.empty():
+    raise RuntimeError(
+        "Failed to load haarcascade_frontalface_default.xml from models/ folder"
+    )
+
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 label_map = {}  # {numeric_id: name}
