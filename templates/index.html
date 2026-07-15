@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Face Recognition App</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header>
+  <h1>Face Recognition App</h1>
+  <p class="subtitle">Detect faces live, register known people, and recognize them in photos.</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="detect">Live Detect</button>
+  <button class="tab-btn" data-tab="register">Register &amp; Recognize</button>
+  <button class="tab-btn" data-tab="upload">Upload &amp; Detect</button>
+</nav>
+
+<main>
+
+  <!-- TAB 1: LIVE DETECT -->
+  <section id="detect" class="tab-panel active">
+    <h2>Live Face Detection</h2>
+    <p>Just draws a box around any face it sees. No recognition.</p>
+    <div class="camera-row">
+      <div class="camera-box">
+        <video id="detect-video" autoplay muted playsinline></video>
+      </div>
+      <div class="camera-box">
+        <img id="detect-output" alt="Processed output will appear here">
+      </div>
+    </div>
+    <div class="controls">
+      <button id="detect-start">Start Camera</button>
+      <button id="detect-stop" disabled>Stop Camera</button>
+      <span id="detect-count" class="badge">0 faces</span>
+    </div>
+  </section>
+
+  <!-- TAB 2: REGISTER & RECOGNIZE -->
+  <section id="register" class="tab-panel">
+    <h2>Register a Known Person</h2>
+    <p>Upload a few clear photos of one person's face (3&ndash;5 works well), then recognize them live.</p>
+
+    <form id="register-form" class="register-form">
+      <input type="text" id="register-name" placeholder="Person's name" required>
+      <input type="file" id="register-images" accept="image/*" multiple required>
+      <button type="submit">Add Person</button>
+    </form>
+    <p id="register-status" class="status"></p>
+
+    <h3>Known People</h3>
+    <ul id="people-list">
+      {% for person in people %}
+        <li>{{ person }}</li>
+      {% else %}
+        <li class="empty">No one registered yet</li>
+      {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h2>Live Recognition</h2>
+    <p>Recognizes any registered faces it sees through your camera.</p>
+    <div class="camera-row">
+      <div class="camera-box">
+        <video id="recognize-video" autoplay muted playsinline></video>
+      </div>
+      <div class="camera-box">
+        <img id="recognize-output" alt="Processed output will appear here">
+      </div>
+    </div>
+    <div class="controls">
+      <button id="recognize-start">Start Camera</button>
+      <button id="recognize-stop" disabled>Stop Camera</button>
+    </div>
+    <ul id="recognize-results" class="results-list"></ul>
+  </section>
+
+  <!-- TAB 3: UPLOAD & DETECT -->
+  <section id="upload" class="tab-panel">
+    <h2>Detect &amp; Recognize in a Photo</h2>
+    <p>Upload any photo. Registered faces will be labeled; others show as Unknown.</p>
+
+    <form id="upload-form" class="upload-form">
+      <input type="file" id="upload-image" accept="image/*" required>
+      <button type="submit">Analyze Photo</button>
+    </form>
+
+    <div class="camera-row">
+      <div class="camera-box">
+        <img id="upload-output" alt="Result will appear here">
+      </div>
+    </div>
+    <ul id="upload-results" class="results-list"></ul>
+  </section>
+
+</main>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
