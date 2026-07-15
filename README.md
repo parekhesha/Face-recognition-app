@@ -1,5 +1,8 @@
 # Face Recognition App
 
+🔗 **Live demo:** https://face-recognition-app-jlxv.onrender.com
+
+
 A Flask web app with three features:
 1. **Live Detect** – draws a box around any face seen through your webcam.
 2. **Register & Recognize** – upload a few photos of a person, then recognize them live via webcam.
