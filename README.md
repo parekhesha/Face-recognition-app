@@ -1,5 +1,7 @@
 # Face Recognition App
 
+[![Live Demo](https://img.shields.io/badge/status-live-brightgreen)](https://face-recognition-app-jlxv.onrender.com) [![Made with Flask](https://img.shields.io/badge/backend-Flask-black)](https://flask.palletsprojects.com/) [![OpenCV](https://img.shields.io/badge/CV-OpenCV-blue)](https://opencv.org/)
+
 🔗 **Live demo:** https://face-recognition-app-jlxv.onrender.com
 
 
